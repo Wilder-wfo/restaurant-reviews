@@ -1,0 +1,22 @@
+<h1>Agregar un comentario del restaurant <%= @restaurant.name %> </h1>
+
+
+<%= simple_form_for [@restaurant, @review] do |form| %>   <!--form_for siguiendo convenciones sabe q ruta generar   -->  
+  <!-- Just to show the errors internally saved in a log and replaced by
+        "render :new" in reviews_controller.rb in create method
+    <ul>
+      <% if @review.errors.any? %>
+        <% @review.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      <% end %>      
+    </ul> 
+  -->
+  <%= form.input :content, label: "Deja tu comentario" %>
+  <%= form.button :submit %>
+  <%= link_to 'Restaurant', restaurant_path(@restaurant) %>
+<% end %>
+
+<!-- form_for doesn't know about the route context, so it create the path: POST /reviews     ... -->
+<!-- but, we need the path: POST restaurants/:restaurant_id/reviews  so we need to           ... -->
+<!-- send the mother instance [@restaurant, @review] and form_for already knows about the ID ... -->
